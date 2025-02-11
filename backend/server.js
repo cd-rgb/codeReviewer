@@ -1,20 +1,24 @@
 require('dotenv').config()
 // const app = require('./src/app')
-const PORT = process.env.PORT || 8000;
+
 const express = require('express');
 const aiRoutes = require('./src/routes/ai.routes')
 const cors = require('cors')
 const path =require('path')
 const app = express()
+const PORT = process.env.PORT || 8000;
+const __dirname = path.resolve();
 
-app.use(cors())
+//middlewares
+app.use(express.json());
+app.use(cookieParser());
+app.use(urlencoded({ extended: true }));
+const corsOptions = {
+    origin: process.env.URL,
+    credentials: true
+}
+app.use(cors(corsOptions));
 
-// const __dirname = path.resolve()
-app.use(express.json())
-
-app.get('/', (_, res) => {
-    res.send('Hello World')
-})
 
 app.use('/ai', aiRoutes)
 
