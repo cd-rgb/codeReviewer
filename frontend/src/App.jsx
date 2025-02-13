@@ -6,11 +6,13 @@ import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import axios from "axios";
-import "./index.css"; // Tailwind will be used instead of App.css
+import { ClipboardCopy, Check } from "lucide-react"; // Copy icon
+import "./index.css"; // Tailwind CSS file
 
 function App() {
   const [code, setCode] = useState('print("Hello World")');
   const [review, setReview] = useState("");
+  const [copied, setCopied] = useState(false);
 
   async function reviewCode() {
     try {
@@ -25,11 +27,18 @@ function App() {
     }
   }
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset after 2 sec
+  };
+
   return (
-    <div className="h-screen w-screen flex flex-col md:flex-row p-4 bg-gray-900 text-white">
-      {/* Left Side: Code Editor */}
-      <div className="flex flex-col md:w-1/2 w-full h-full bg-black rounded-xl p-4 relative">
-        <div className="flex-1 overflow-auto border border-gray-700 rounded-lg p-2">
+    <main className="h-screen w-full p-6 flex flex-col md:flex-row gap-4 bg-gray-900 text-white">
+      {/* Left Section */}
+      <div className="flex-1 bg-black p-4 rounded-lg relative flex flex-col">
+        {/* Code Editor */}
+        <div className="relative flex-1 overflow-auto border border-gray-700 rounded-lg">
           <Editor
             value={code}
             onValueChange={setCode}
@@ -40,26 +49,35 @@ function App() {
             style={{
               fontFamily: '"Fira Code", monospace',
               fontSize: 16,
-              minHeight: "300px",
+              minHeight: "6000px",
+              maxHeight: "7000px",
+              overflowY: "auto",
+              borderRadius: "10px",
             }}
           />
+          {/* Copy Button */}
+          <button
+            onClick={copyToClipboard}
+            className="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 p-2 rounded-lg"
+          >
+            {copied ? <Check size={20} color="lime" /> : <ClipboardCopy size={20} />}
+          </button>
         </div>
+
+        {/* Review Button */}
         <button
           onClick={reviewCode}
-          className="absolute bottom-4 right-4 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition"
+          className="mt-4 bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg"
         >
-          Review
+          Review Code
         </button>
       </div>
 
-      {/* Right Side: Review Output */}
-      <div className="md:w-1/2 w-full h-full bg-gray-800 rounded-xl p-4 overflow-auto">
-        <h2 className="text-lg font-bold mb-2">Code Review</h2>
-        <Markdown rehypePlugins={[rehypeHighlight]} className="prose">
-          {review}
-        </Markdown>
+      {/* Right Section */}
+      <div className="flex-1 bg-gray-800 p-4 rounded-lg overflow-auto">
+        <Markdown rehypePlugins={[rehypeHighlight]}>{review}</Markdown>
       </div>
-    </div>
+    </main>
   );
 }
 
