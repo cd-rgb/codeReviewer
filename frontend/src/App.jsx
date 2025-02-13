@@ -56,7 +56,8 @@ function App() {
       <div className="flex-1 bg-black p-4 rounded-lg relative flex flex-col">
         <div
           ref={editorRef} // Attach ref to the outer div
-          className="relative flex-1 overflow-auto border border-gray-700 rounded-lg"
+          className="relative flex-1 overflow-auto border border-gray-700 rounded-lg w-full"
+          style={{ maxWidth: "100%", wordWrap: "break-word" }}
         >
           <Editor
             value={code}
@@ -73,14 +74,23 @@ function App() {
               maxHeight: "700px",
               overflowY: "auto",
               borderRadius: "10px",
+              whiteSpace: "pre-wrap", // ✅ Ensures lines wrap
+              wordBreak: "break-word", // ✅ Breaks long words
+              overflowWrap: "break-word", // ✅ Ensures long words wrap properly
+              width: "100%", // ✅ Ensures it stays within parent
             }}
           />
+
           {/* Copy Button */}
           <button
             onClick={copyToClipboard}
             className="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 p-2 rounded-lg"
           >
-            {copied ? <Check size={20} color="lime" /> : <ClipboardCopy size={20} />}
+            {copied ? (
+              <Check size={20} color="lime" />
+            ) : (
+              <ClipboardCopy size={20} />
+            )}
           </button>
         </div>
 
@@ -95,7 +105,10 @@ function App() {
 
       {/* Right Section (Review Output) */}
       <div className="flex-1 bg-gray-800 p-4 rounded-lg overflow-auto">
-        <Markdown rehypePlugins={[rehypeHighlight]} className="prose max-w-full">
+        <Markdown
+          rehypePlugins={[rehypeHighlight]}
+          className="prose max-w-full"
+        >
           {review}
         </Markdown>
       </div>
