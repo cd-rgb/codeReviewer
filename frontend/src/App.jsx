@@ -34,8 +34,8 @@ function App() {
   };
 
   return (
-    <main className="h-screen w-full p-6 flex flex-col md:flex-row gap-4 bg-gray-900 text-white">
-      {/* Left Section */}
+    <main className="h-screen w-full p-4 flex flex-col md:flex-row gap-4 bg-gray-900 text-white">
+      {/* Left Section (Code Editor) */}
       <div className="flex-1 bg-black p-4 rounded-lg relative flex flex-col">
         {/* Code Editor */}
         <div className="relative flex-1 overflow-auto border border-gray-700 rounded-lg">
@@ -49,10 +49,11 @@ function App() {
             style={{
               fontFamily: '"Fira Code", monospace',
               fontSize: 16,
-              minHeight: "6000px",
-              maxHeight: "7000px",
+              minHeight: "300px",  // Flexible min height
+              maxHeight: "calc(100vh - 150px)",  // Adjust max height
               overflowY: "auto",
               borderRadius: "10px",
+              resize: "none",  // Prevent manual resizing
             }}
           />
           {/* Copy Button */}
@@ -73,8 +74,9 @@ function App() {
         </button>
       </div>
 
-      {/* Right Section */}
+      {/* Right Section (Review Area) */}
       <div className="flex-1 bg-gray-800 p-4 rounded-lg overflow-auto">
+        <h2 className="text-lg font-semibold mb-4 text-gray-200">Code Review</h2>
         <Markdown rehypePlugins={[rehypeHighlight]}>{review}</Markdown>
       </div>
     </main>
