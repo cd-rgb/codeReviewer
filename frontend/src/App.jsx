@@ -13,11 +13,11 @@ function App() {
   const [code, setCode] = useState('print("Hello World")');
   const [review, setReview] = useState("");
   const [copied, setCopied] = useState(false);
-  const editorRef = useRef(null); 
+  const editorRef = useRef(null); // Reference for Editor container
 
   useEffect(() => {
     if (editorRef.current) {
-      editorRef.current.querySelector("textarea")?.focus(); 
+      editorRef.current.querySelector("textarea")?.focus(); // Focus on the textarea inside Editor
     }
   }, [code]); // Re-focus after pasting
 
