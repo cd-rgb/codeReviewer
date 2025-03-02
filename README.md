@@ -55,7 +55,7 @@ npm run dev
 ```
 
 ## Deployment
-This project is deployed on **Render**. You can access it [here](https://your-app-url.onrender.com).
+This project is deployed on **Render**. You can access it [here](https://aicodereviewer.onrender.com/).
 
 ### Deploying on Render
 1. Create a **Render** account.
