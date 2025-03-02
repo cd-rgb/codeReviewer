@@ -36,7 +36,7 @@ Ensure you have **Node.js** and **npm** installed.
 
 ### Clone the Repository
 ```sh
-git clone https://github.com/yourusername/aicoderreviewer.git
+git clone https://github.com/KhushiPandey8/aicoderreviewer.git
 cd aicoderreviewer
 ```
 
@@ -67,12 +67,12 @@ This project is deployed on **Render**. You can access it [here](https://your-ap
 We welcome contributions! Follow these steps to contribute:
 
 ### Fork the Repository
-1. Go to the [repository](https://github.com/yourusername/aicoderreviewer) on GitHub.
+1. Go to the [repository](https://github.com/KhushiPandey8/aicoderreviewer) on GitHub.
 2. Click on the **Fork** button (top right corner) to create a copy of the repository under your GitHub account.
 
 ### Clone Your Fork
 ```sh
-git clone https://github.com/yourusername/aicoderreviewer.git
+git clone https://github.com/KhushiPandey8/aicoderreviewer.git
 cd aicoderreviewer
 ```
 
@@ -112,5 +112,4 @@ Developed by **Khushi Pandey**.
 ---
 Feel free to contribute and improve AI Code Reviewer! 🚀
 
-=======
-
+=====
