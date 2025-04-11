@@ -1,24 +1,30 @@
-require('dotenv').config();
-const express = require('express');
-const aiRoutes = require('./src/routes/ai.routes');
-const cors = require('cors');
-const path = require('path');
+import { config } from 'dotenv';
+import express, { json } from 'express';
+import { static as serveStatic } from 'express';
+import aiRoutes from './src/routes/ai.routes.js';
+import cors from 'cors';
+import { join, resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+config({ path: "./.env" });
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+config({ path: "./.env" });
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT =5000
 
 // Middlewares
-app.use(express.json());
-app.use(cors({ origin: process.env.URL, credentials: true }));
+app.use(json());
+app.use(cors());
 
 // Routes
 app.use('/ai', aiRoutes);
 
-// Serve Frontend
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
-});
+// app.use(serveStatic(join(__dirname, "../frontend/dist")));
+
+// app.get("*", (req, res) => {
+//     res.sendFile(resolve(__dirname, "../frontend/dist/index.html"));
+// });
 
 
 
